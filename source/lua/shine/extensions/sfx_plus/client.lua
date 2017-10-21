@@ -77,6 +77,7 @@ function Plugin:Initialise()
         [ "FeedbackKillRand" ]  = "sound/sfx_plus.fev/onkill/random",
         [ "FeedbackAssist" ]    = "sound/sfx_plus.fev/onassist/sound",
         [ "FeedbackAssistRand" ]= "sound/sfx_plus.fev/onassist/random",
+        [ "Doublekill" ]        = "sound/sfx_plus.fev/onkillstreak/doublekill",
         [ "Triplekill" ]        = "sound/sfx_plus.fev/onkillstreak/triplekill",
         [ "Multikill" ]         = "sound/sfx_plus.fev/onkillstreak/multikill",
         [ "Rampage" ]           = "sound/sfx_plus.fev/onkillstreak/rampage",
