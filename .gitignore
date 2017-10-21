@@ -1,1 +1,4 @@
 output
+*.bak
+*.log
+undo-log.txt
