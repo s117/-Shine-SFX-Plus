@@ -211,17 +211,6 @@ function Plugin:Cleanup()
     self.Enabled = false
 end
 
--- -----------   VOTE MENU ENTRY   ------------ --
-
-VoteMenu:EditPage( "Main", function( self )
-    if Plugin.Enabled then
-        self:AddSideButton( "Kill SFX Menu", function()
-            self:ForceHide()
-            Shared.ConsoleCommand( "sh_killsfxconfigmenu" )
-        end )
-    end
-end )
-
 -- ---------------   GUI PART   --------------- --
 
 --[[
@@ -246,25 +235,27 @@ KillSfxConfigMenu.Size = UnitVector( HighResScaled( 600 ), HighResScaled( 500 ) 
 KillSfxConfigMenu.EasingTime = 0.25
 
 -- String constants in GUI
-TAB_NAME_KA_INDICATOR   = "Kill & Assist"
-TAB_NAME_KILLSTREAK     = "Killstreak"
-TAB_NAME_THUGKILL       = "Thug kill"
+local VOTEMENU_BTN_NAME                                 = Locale:GetPhrase( "sfx_plus", "CLIENT_VOTEMENU_BTN_NAME" )
 
-TAB_KA_INDICATOR_LABEL_MAIN                     = "Assist and kill vocal feedback settings"
-TAB_KA_INDICATOR_LABEL_ENABLE_KILL_FEEDBACK     = "Enable kill sound feedback."
-TAB_KA_INDICATOR_LABEL_KILL_FEEDBACK_VOLUME     = "Kill feedback volume:"
-TAB_KA_INDICATOR_LABEL_ENABLE_ASSIST_FEEDBACK   = "Enable assist sound feedback."
-TAB_KA_INDICATOR_LABEL_ASSIST_FEEDBACK_VOLUME   = "Assist feedback volume:"
+local TAB_NAME_KA_INDICATOR                             = Locale:GetPhrase( "sfx_plus", "CLIENT_TAB_NAME_KA_INDICATOR" )
+local TAB_NAME_KILLSTREAK                               = Locale:GetPhrase( "sfx_plus", "CLIENT_TAB_NAME_KILLSTREAK" )
+local TAB_NAME_THUGKILL                                 = Locale:GetPhrase( "sfx_plus", "CLIENT_TAB_NAME_THUGKILL" )
 
-TAB_KILLSTREAK_LABEL_MAIN                       = "Killstreak sound effect settings"
-TAB_KILLSTREAK_LABEL_ENABLE_PLAY_KILLSTREAK_SOUND   = "Play Quake killstreak sound effect."
-TAB_KILLSTREAK_LABEL_KILLSTREAK_SOUND_VOLUME    = "Killstreak sfx volume:"
-TAB_KILLSTREAK_LABEL_ENABLE_PLAY_STREAKSTOP_SOUND   = "Play streak stop sound."
-TAB_KILLSTREAK_LABEL_STREAKSTOP_SOUND_VOLUME    = "Streak stop volume:"
+local TAB_KA_INDICATOR_LABEL_MAIN                       = Locale:GetPhrase( "sfx_plus", "CLIENT_TAB_KA_INDICATOR_LABEL_MAIN" )
+local TAB_KA_INDICATOR_LABEL_ENABLE_KILL_FEEDBACK       = Locale:GetPhrase( "sfx_plus", "CLIENT_TAB_KA_INDICATOR_LABEL_ENABLE_KILL_FEEDBACK" )
+local TAB_KA_INDICATOR_LABEL_KILL_FEEDBACK_VOLUME       = Locale:GetPhrase( "sfx_plus", "CLIENT_TAB_KA_INDICATOR_LABEL_KILL_FEEDBACK_VOLUME" )
+local TAB_KA_INDICATOR_LABEL_ENABLE_ASSIST_FEEDBACK     = Locale:GetPhrase( "sfx_plus", "CLIENT_TAB_KA_INDICATOR_LABEL_ENABLE_ASSIST_FEEDBACK" )
+local TAB_KA_INDICATOR_LABEL_ASSIST_FEEDBACK_VOLUME     = Locale:GetPhrase( "sfx_plus", "CLIENT_TAB_KA_INDICATOR_LABEL_ASSIST_FEEDBACK_VOLUME" )
 
-TAB_THUGKILL_LABEL_MAIN                         = "Thug kill sound effect settings"
-TAB_THUGKILL_LABEL_ENABLE_PLAY_THUGKILL_SOUND       = "Play thug kill sound effect."
-TAB_THUGKILL_LABEL_THUGKILL_SOUND_VOLUME        = "Thug kill sfx volume:"
+local TAB_KILLSTREAK_LABEL_MAIN                         = Locale:GetPhrase( "sfx_plus", "CLIENT_TAB_KILLSTREAK_LABEL_MAIN" )
+local TAB_KILLSTREAK_LABEL_ENABLE_PLAY_KILLSTREAK_SOUND = Locale:GetPhrase( "sfx_plus", "CLIENT_TAB_KILLSTREAK_LABEL_ENABLE_PLAY_KILLSTREAK_SOUND" )
+local TAB_KILLSTREAK_LABEL_KILLSTREAK_SOUND_VOLUME      = Locale:GetPhrase( "sfx_plus", "CLIENT_TAB_KILLSTREAK_LABEL_KILLSTREAK_SOUND_VOLUME" )
+local TAB_KILLSTREAK_LABEL_ENABLE_PLAY_STREAKSTOP_SOUND = Locale:GetPhrase( "sfx_plus", "CLIENT_TAB_KILLSTREAK_LABEL_ENABLE_PLAY_STREAKSTOP_SOUND" )
+local TAB_KILLSTREAK_LABEL_STREAKSTOP_SOUND_VOLUME      = Locale:GetPhrase( "sfx_plus", "CLIENT_TAB_KILLSTREAK_LABEL_STREAKSTOP_SOUND_VOLUME" )
+
+local TAB_THUGKILL_LABEL_MAIN                           = Locale:GetPhrase( "sfx_plus", "CLIENT_TAB_THUGKILL_LABEL_MAIN" )
+local TAB_THUGKILL_LABEL_ENABLE_PLAY_THUGKILL_SOUND     = Locale:GetPhrase( "sfx_plus", "CLIENT_TAB_THUGKILL_LABEL_ENABLE_PLAY_THUGKILL_SOUND" )
+local TAB_THUGKILL_LABEL_THUGKILL_SOUND_VOLUME          = Locale:GetPhrase( "sfx_plus", "CLIENT_TAB_THUGKILL_LABEL_THUGKILL_SOUND_VOLUME" )
 
 local function Run_sh_sfx_plus_en( Cat, Val )
     local console_cmd = StringFormat( "sh_sfxplus_en %s %s", Cat, Val )
@@ -677,6 +668,17 @@ end
 
 Shine:RegisterClientCommand( "sh_killsfxconfigmenu", function()
     KillSfxConfigMenu:Show()
+end )
+
+-- -----------   VOTE MENU ENTRY   ------------ --
+
+VoteMenu:EditPage( "Main", function( self )
+    if Plugin.Enabled then
+        self:AddSideButton( VOTEMENU_BTN_NAME, function()
+            self:ForceHide()
+            Shared.ConsoleCommand( "sh_killsfxconfigmenu" )
+        end )
+    end
 end )
 
 Dbg( "[Shine]SFX-Plus: Log: INIT DONE...." )
