@@ -206,7 +206,7 @@ Plugin.DefaultConfig = {
             {
                 TriggerLevel = 21,
                 Text = {
-                    zhCN = "%s 无人能挡被 %s 终结了",     -- first victim then killer
+                    zhCN = "%s 怪物般的杀戮被 %s 终结了",     -- first victim then killer
                     enUS = "%s's monster kill has been stopped by %s",        -- first victim then killer
                 },
                 Broadcast = true,
