@@ -35,33 +35,41 @@ Plugin.DefaultConfig = {
 
     KillStreak = {
         Desc = {
+            [ 2 ] = {
+                Text = {
+                    zhCN = "%s 拿到双杀！",
+                    enUS = "%s is on a double kill!",
+                },
+                Broadcast = false,
+                Sound = "Doublekill"
+            },
             [ 3 ] = {
                 Text = {
-                    zhCN = "%s is on a triple kill! zhCN",
+                    zhCN = "%s 拿了三杀！",
                     enUS = "%s is on a triple kill!",
                 },
-                Broadcast = true,
+                Broadcast = false,
                 Sound = "Triplekill"
+            },
+            [ 4 ] = {
+                Text = {
+                    zhCN = "%s 连杀不止！",
+                    enUS = "%s is on multikill!",
+                },
+                Broadcast = false,
+                Sound = "Multikill"
             },
             [ 5 ] = {
                 Text = {
-                    zhCN = "%s is on multikill! zhCN",
-                    enUS = "%s is on multikill!",
+                    zhCN = "%s 暴跳如雷！",
+                    enUS = "%s is on rampage!",
                 },
-                Broadcast = true,
-                Sound = "Multikill"
+                Broadcast = false,
+                Sound = "Rampage"
             },
             [ 6 ] = {
                 Text = {
-                    zhCN = "%s is on rampage! zhCN",
-                    enUS = "%s is on rampage!",
-                },
-                Broadcast = true,
-                Sound = "Rampage"
-            },
-            [ 7 ] = {
-                Text = {
-                    zhCN = "%s is on a killing spree! zhCN",
+                    zhCN = "%s 杀红了眼！",
                     enUS = "%s is on a killing spree!",
                 },
                 Broadcast = true,
@@ -69,15 +77,15 @@ Plugin.DefaultConfig = {
             },
             [ 9 ] = {
                 Text = {
-                    zhCN = "%s is dominating! zhCN",
+                    zhCN = "%s 称霸全场！",
                     enUS = "%s is dominating!",
                 },
-                Broadcast = true,
+                Broadcast = false,
                 Sound = "Dominating"
             },
             [ 11 ] = {
                 Text = {
-                    zhCN = "%s is unstoppable! zhCN",
+                    zhCN = "%s 无人能挡！",
                     enUS = "%s is unstoppable!",
                 },
                 Broadcast = true,
@@ -85,55 +93,55 @@ Plugin.DefaultConfig = {
             },
             [ 13 ] = {
                 Text = {
-                    zhCN = "%s made a mega kill! zhCN",
+                    zhCN = "%s 大杀特杀！",
                     enUS = "%s made a mega kill!",
                 },
-                Broadcast = true,
+                Broadcast = false,
                 Sound = "Megakill"
             },
             [ 15 ] = {
                 Text = {
-                    zhCN = "%s made an ultra kill! zhCN",
+                    zhCN = "%s 特杀超杀！",
                     enUS = "%s made an ultra kill!",
                 },
-                Broadcast = true,
+                Broadcast = false,
                 Sound = "Ultrakill"
             },
             [ 17 ] = {
                 Text = {
-                    zhCN = "%s owns! zhCN",
+                    zhCN = "%s 主宰全场！",
                     enUS = "%s owns!",
                 },
-                Broadcast = true,
+                Broadcast = false,
                 Sound = "Ownage"
             },
             [ 18 ] = {
                 Text = {
-                    zhCN = "%s made a ludicrouskill! zhCN",
+                    zhCN = "%s 边杀边笑！",
                     enUS = "%s made a ludicrouskill!",
                 },
-                Broadcast = true,
+                Broadcast = false,
                 Sound = "Ludicrouskill"
             },
             [ 19 ] = {
                 Text = {
-                    zhCN = "%s is a head hunter! zhCN",
+                    zhCN = "%s 是个猎头！",
                     enUS = "%s is a head hunter!",
                 },
-                Broadcast = true,
+                Broadcast = false,
                 Sound = "Headhunter"
             },
             [ 20 ] = {
                 Text = {
-                    zhCN = "%s is whicked sick! zhCN",
+                    zhCN = "%s 是个变态！",
                     enUS = "%s is whicked sick!",
                 },
-                Broadcast = true,
+                Broadcast = false,
                 Sound = "Whickedsick"
             },
             [ 21 ] = {
                 Text = {
-                    zhCN = "%s made a monster kill! zhCN",
+                    zhCN = "%s 怪怪怪怪怪物一样！",
                     enUS = "%s made a monster kill!",
                 },
                 Broadcast = true,
@@ -141,7 +149,15 @@ Plugin.DefaultConfig = {
             },
             [ 23 ] = {
                 Text = {
-                    zhCN = "Holy Shit! %s got another one! zhCN",
+                    zhCN = "天哪！ %s 又杀了一个！",
+                    enUS = "Holy Shit! %s got another one!",
+                },
+                Broadcast = true,
+                Sound = "Holyshit"
+            },
+            [ 24 ] = {
+                Text = {
+                    zhCN = "天哪！ %s 又杀了一个！",
                     enUS = "Holy Shit! %s got another one!",
                 },
                 Broadcast = true,
@@ -149,21 +165,21 @@ Plugin.DefaultConfig = {
             },
             [ 25 ] = {
                 Text = {
-                    zhCN = "%s is G o d L i k e !!! zhCN",
+                    zhCN = "%s 已！经！超！神！",
                     enUS = "%s is G o d L i k e !!!",
                 },
                 Broadcast = true,
                 Sound = "Godlike"
             },
-            [ 27 ] = 25,
-            [ 30 ] = 25,
-            [ 34 ] = 25,
-            [ 40 ] = 25,
+            [ 28 ] = 25,
+            [ 38 ] = 25,
             [ 48 ] = 25,
             [ 58 ] = 25,
-            [ 70 ] = 25,
-            [ 80 ] = 25,
-            [ 100 ] = 25
+            [ 69 ] = 25,
+            [ 78 ] = 25,
+            [ 88 ] = 25,
+            [ 98 ] = 25,
+            [ 108 ] = 25
         }
     },
     StreakStop = {
@@ -171,17 +187,8 @@ Plugin.DefaultConfig = {
             {
                 TriggerLevel = 6,
                 Text = {
-                    zhCN = "%s's Rampage has been stopped by %s zhCN", -- first victim then killer
-                    enUS = "%s's Rampage has been stopped by %s ",        -- first victim then killer
-                },
-                Broadcast = true,
-                Sound = "StreakStop"
-            },
-            {
-                TriggerLevel = 9,
-                Text = {
-                    zhCN = "%s's Dominating has been stopped by %s zhCN", -- first victim then killer
-                    enUS = "%s's Dominating has been stopped by %s ",        -- first victim then killer
+                    zhCN = "%s 的连杀已经被 %s 终结了", -- first victim then killer
+                    enUS = "%s's killing spree has been stopped by %s ",        -- first victim then killer
                 },
                 Broadcast = true,
                 Sound = "StreakStop"
@@ -189,17 +196,17 @@ Plugin.DefaultConfig = {
             {
                 TriggerLevel = 11,
                 Text = {
-                    zhCN = "%s's Unstoppable has been stopped by %s zhCN", -- first victim then killer
-                    enUS = "%s's Unstoppable has been stopped by %s ",        -- first victim then killer
+                    zhCN = "%s 无人能挡被 %s 终结了", -- first victim then killer
+                    enUS = "%s's unstoppable has been stopped by %s",        -- first victim then killer
                 },
                 Broadcast = true,
                 Sound = "StreakStop"
             },
             {
-                TriggerLevel = 17,
+                TriggerLevel = 21,
                 Text = {
-                    zhCN = "%s's Ownage has been stopped by %s zhCN", -- first victim then killer
-                    enUS = "%s's Ownage has been stopped by %s ",        -- first victim then killer
+                    zhCN = "%s 无人能挡被 %s 终结了", -- first victim then killer
+                    enUS = "%s's monster kill has been stopped by %s",        -- first victim then killer
                 },
                 Broadcast = true,
                 Sound = "StreakStop"
@@ -207,8 +214,8 @@ Plugin.DefaultConfig = {
             {
                 TriggerLevel = 25,
                 Text = {
-                    zhCN = "%s's Godlike has been stopped by %s zhCN", -- first victim then killer
-                    enUS = "%s's Godlike has been stopped by %s ",        -- first victim then killer
+                    zhCN = "%s 的超神已经被 %s 终结了", -- first victim then killer
+                    enUS = "%s's Godlike has been stopped by %s",        -- first victim then killer
                 },
                 Broadcast = true,
                 Sound = "StreakStop"
@@ -219,48 +226,48 @@ Plugin.DefaultConfig = {
         Desc = {
             [ 3 ] = { -- Weapon ID - Marine Rifle Butt
                 Text = {
-                    zhCN = "%s kills %s by Gun Punch! zhCN",        -- first killer then victim
-                    enUS = "%s kills %s by Gun Punch!",        -- first killer then victim
+                    zhCN = "%s 用枪托击杀了 %s！",        -- first killer then victim
+                    enUS = "%s kills %s by RIFLEBUTT!",        -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
             },
             [ 5 ] = { -- Weapon ID - Marine Knife
                 Text = {
-                    zhCN = "%s kills %s by Axe! zhCN",        -- first killer then victim
-                    enUS = "%s kills %s by Axe!",        -- first killer then victim
+                    zhCN = "%s 用斧子击杀了 %s！",        -- first killer then victim
+                    enUS = "%s kills %s by AXE!",        -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
             },
             [ 11 ] = { -- Weapon ID - Marine Welder
                 Text = {
-                    zhCN = "%s kills %s by Welder! zhCN",        -- first killer then victim
-                    enUS = "%s kills %s by Welder!",        -- first killer then victim
+                    zhCN = "%s 用焊枪击杀了 %s！",        -- first killer then victim
+                    enUS = "%s kills %s by WELDER!",        -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
             },
             [ 14 ] = { -- Weapon ID - Groge's Heal Spray
                 Text = {
-                    zhCN = "%s kills %s by Heal Spray! zhCN",        -- first killer then victim
-                    enUS = "%s kills %s by Heal Spray!",        -- first killer then victim
+                    zhCN = "%s 用疗伤喷雾击杀了 %s！",        -- first killer then victim
+                    enUS = "%s kills %s by HEAL SPRAY!",        -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
             },
             [ 16 ] = { -- Weapon ID - Skulk's parasite
                 Text = {
-                    zhCN = "%s kills %s by Parasite! zhCN",        -- first killer then victim
-                    enUS = "%s kills %s by Parasite!",        -- first killer then victim
+                    zhCN = "%s 用寄生击杀了 %s！",        -- first killer then victim
+                    enUS = "%s kills %s by PARASITE!",        -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
             },
             [ 21 ] = { -- Weapon ID - Groge's BileBomb
                 Text = {
-                    zhCN = "%s kills %s by BileBomb! zhCN",        -- first killer then victim
-                    enUS = "%s kills %s by BileBomb!",        -- first killer then victim
+                    zhCN = "%s 用胆汁炸弹击杀了 %s！",        -- first killer then victim
+                    enUS = "%s kills %s by BILEBOMB!",        -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
@@ -283,7 +290,7 @@ Plugin.DefaultConfig = {
     }
 }
 
-local debug_print = true
+local debug_print = false
 
 local function Dbg( ... )
     arg = {...}

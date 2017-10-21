@@ -45,7 +45,7 @@ Plugin.DefaultConfig = {
     }
 }
 
-local debug_print = true
+local debug_print = false
 
 local function Dbg( ... )
     arg = {...}
