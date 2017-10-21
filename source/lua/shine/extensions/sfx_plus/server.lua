@@ -6,6 +6,7 @@ local Shine = Shine
 local StringFormat = string.format
 local IsType = Shine.IsType
 local Clients = Shine.GameIDs
+local Locale = Shine.Locale
 local Plugin = Plugin
 
 local CAT_KILL       = "kill"
@@ -187,7 +188,7 @@ Plugin.DefaultConfig = {
             {
                 TriggerLevel = 6,
                 Text = {
-                    zhCN = "%s 的连杀已经被 %s 终结了",  -- first victim then killer
+                    zhCN = "%s 的连杀已经被 %s 终结了",     -- first victim then killer
                     enUS = "%s's killing spree has been stopped by %s ",        -- first victim then killer
                 },
                 Broadcast = true,
@@ -197,7 +198,7 @@ Plugin.DefaultConfig = {
                 TriggerLevel = 11,
                 Text = {
                     zhCN = "%s 无人能挡被 %s 终结了", -- first victim then killer
-                    enUS = "%s's unstoppable has been stopped by %s",         -- first victim then killer
+                    enUS = "%s's unstoppable has been stopped by %s",            -- first victim then killer
                 },
                 Broadcast = true,
                 Sound = "StreakStop"
@@ -205,7 +206,7 @@ Plugin.DefaultConfig = {
             {
                 TriggerLevel = 21,
                 Text = {
-                    zhCN = "%s 无人能挡被 %s 终结了",  -- first victim then killer
+                    zhCN = "%s 无人能挡被 %s 终结了",     -- first victim then killer
                     enUS = "%s's monster kill has been stopped by %s",        -- first victim then killer
                 },
                 Broadcast = true,
@@ -215,7 +216,7 @@ Plugin.DefaultConfig = {
                 TriggerLevel = 25,
                 Text = {
                     zhCN = "%s 的超神已经被 %s 终结了", -- first victim then killer
-                    enUS = "%s's Godlike has been stopped by %s",         -- first victim then killer
+                    enUS = "%s's Godlike has been stopped by %s",            -- first victim then killer
                 },
                 Broadcast = true,
                 Sound = "StreakStop"
@@ -226,48 +227,48 @@ Plugin.DefaultConfig = {
         Desc = {
             [ 3 ] = { -- Weapon ID - Marine Rifle Butt
                 Text = {
-                    zhCN = "%s 用枪托击杀了 %s！",         -- first killer then victim
-                    enUS = "%s kills %s by RIFLEBUTT!",         -- first killer then victim
+                    zhCN = "%s 用枪托击杀了 %s！",            -- first killer then victim
+                    enUS = "%s kills %s by RIFLEBUTT!",            -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
             },
             [ 5 ] = { -- Weapon ID - Marine Knife
                 Text = {
-                    zhCN = "%s 用斧子击杀了 %s！",         -- first killer then victim
-                    enUS = "%s kills %s by AXE!",         -- first killer then victim
+                    zhCN = "%s 用斧子击杀了 %s！",            -- first killer then victim
+                    enUS = "%s kills %s by AXE!",            -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
             },
             [ 11 ] = { -- Weapon ID - Marine Welder
                 Text = {
-                    zhCN = "%s 用焊枪击杀了 %s！",         -- first killer then victim
-                    enUS = "%s kills %s by WELDER!",         -- first killer then victim
+                    zhCN = "%s 用焊枪击杀了 %s！",            -- first killer then victim
+                    enUS = "%s kills %s by WELDER!",            -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
             },
             [ 14 ] = { -- Weapon ID - Groge's Heal Spray
                 Text = {
-                    zhCN = "%s 用疗伤喷雾击杀了 %s！",         -- first killer then victim
-                    enUS = "%s kills %s by HEAL SPRAY!",         -- first killer then victim
+                    zhCN = "%s 用疗伤喷雾击杀了 %s！",            -- first killer then victim
+                    enUS = "%s kills %s by HEAL SPRAY!",            -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
             },
             [ 16 ] = { -- Weapon ID - Skulk's parasite
                 Text = {
-                    zhCN = "%s 用寄生击杀了 %s！",         -- first killer then victim
-                    enUS = "%s kills %s by PARASITE!",         -- first killer then victim
+                    zhCN = "%s 用寄生击杀了 %s！",            -- first killer then victim
+                    enUS = "%s kills %s by PARASITE!",            -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
             },
             [ 21 ] = { -- Weapon ID - Groge's BileBomb
                 Text = {
-                    zhCN = "%s 用胆汁炸弹击杀了 %s！",         -- first killer then victim
-                    enUS = "%s kills %s by BILEBOMB!",         -- first killer then victim
+                    zhCN = "%s 用胆汁炸弹击杀了 %s！",            -- first killer then victim
+                    enUS = "%s kills %s by BILEBOMB!",            -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
@@ -305,24 +306,20 @@ function Plugin:Initialise()
     self.ClientPreferredLocale = {}
     self.Killstreaks = {}
 
-    Plugin:CreateCommands()
-
     table.sort(self.Config.StreakStop.Desc,
         function (a, b) return a.TriggerLevel < b.TriggerLevel end)
 
-    -- self:SaveConfig()
+    Plugin:CreateCommands()
 
     Dbg("[Shine] SFX-Plus: Server loaded.")
 
     return true
 end
 
-
 function Plugin:CreateCommands()
     local sh_sfxplus_en_handler = function ( Client, Cat, IsPlay )
         if not IsType(IsPlay, "boolean") then
-            Shine:NotifyColour( Client, 255, 0, 0, StringFormat( "Error: Invalid parameter, check your command." ) )
-
+            Plugin:SendTranslatedNotifyColour( Client, "SERVER_SET_ERROR_INVALID_PARAMETER", { R = 255, G = 0, B = 0 } )
             return
         end
 
@@ -330,19 +327,21 @@ function Plugin:CreateCommands()
 
         if self.Config.Enabled[lower_cat] then
             self:SendNetworkMessage( Client, "Command", { Name = "SetEnable", Category = lower_cat, Value = IsPlay and 1 or 0 } , true)
-            Shine:NotifyColour( Client, 0, 255, 0, StringFormat( "Setting accepted: %s sound for '%s'", IsPlay and "Play" or "Mute", Cat ) )
+
+            Plugin:SendTranslatedNotifyColour( Client,
+                IsPlay and "SERVER_SET_ENABLE_SUCCESS_PLAY" or "SERVER_SET_ENABLE_SUCCESS_MUTE"
+                , { R = 0, G = 255, B = 0, Category = Cat } )
             return
-        else if self.Config.Enabled[lower_cat] == nil then
-            Shine:NotifyColour( Client, 255, 0, 0, StringFormat( "Error: No category '%s', check your command.", Cat ) )
+        elseif self.Config.Enabled[lower_cat] == nil then
+            Plugin:SendTranslatedNotifyColour( Client, "SERVER_SET_ERROR_NO_CATEGORY", { R = 255, G = 0, B = 0, Category = Cat } )
         else
-            Shine:NotifyColour( Client, 255, 0, 0, StringFormat( "Error: Category '%s' is disabled on this server.", Cat ) )
-        end
+            Plugin:SendTranslatedNotifyColour( Client, "SERVER_SET_ERROR_CATEGORY_DISABLED", { R = 255, G = 0, B = 0, Category = Cat } )
         end
     end
+
     local sh_sfxplus_vol_handler = function ( Client, Cat, Volume )
         if not ( IsType(Volume, "number") and (0 <= Volume) and (Volume <= 200) ) then
-            Shine:NotifyColour( Client, 255, 0, 0, StringFormat( "Error: Invalid parameter, check your command." ) )
-
+            Plugin:SendTranslatedNotifyColour( Client, "SERVER_SET_ERROR_INVALID_PARAMETER", { R = 255, G = 0, B = 0 } )
             return
         end
 
@@ -350,13 +349,14 @@ function Plugin:CreateCommands()
 
         if self.Config.Enabled[lower_cat] then
             self:SendNetworkMessage( Client, "Command", { Name = "SetVolume", Category = lower_cat, Value = Volume } , true)
-            Shine:NotifyColour( Client, 0, 255, 0, StringFormat( "Setting accepted: The volume of '%s' is now %s", Cat, Volume ) )
+            Plugin:SendTranslatedNotifyColour( Client,
+                "SERVER_SET_VOLUME_SUCCESS"
+                , { R = 0, G = 255, B = 0, Category = Cat, Value = Volume } )
             return
-        else if self.Config.Enabled[lower_cat] == nil then
-            Shine:NotifyColour( Client, 255, 0, 0, StringFormat( "Error: No category '%s', check your command.", Cat ) )
+        elseif self.Config.Enabled[lower_cat] == nil then
+            Plugin:SendTranslatedNotifyColour( Client, "SERVER_SET_ERROR_NO_CATEGORY", { R = 255, G = 0, B = 0, Category = Cat } )
         else
-            Shine:NotifyColour( Client, 255, 0, 0, StringFormat( "Error: Category '%s' is disabled on this server.", Cat ) )
-        end
+            Plugin:SendTranslatedNotifyColour( Client, "SERVER_SET_ERROR_CATEGORY_DISABLED", { R = 255, G = 0, B = 0, Category = Cat } )
         end
     end
 

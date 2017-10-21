@@ -24,6 +24,29 @@ function Plugin:SetupDataTable()
         Value = "string (255)"
     }
     self:AddNetworkMessage( "ClientMsg", CMsg, "Server" )
+
+    local MessageTypes = {
+        None = {},
+        CatOnly = {
+            Category = "string(15)",
+        },
+        CatAndValue = {
+            Category = "string(15)",
+            Value    = "integer (0 to 200)"
+        }
+    }
+
+    self:AddNetworkMessages( "AddTranslatedNotifyColour", {
+        [ MessageTypes.None ] = {
+            "SERVER_SET_ERROR_INVALID_PARAMETER"
+        },
+        [ MessageTypes.CatOnly ] = {
+            "SERVER_SET_ENABLE_SUCCESS_PLAY", "SERVER_SET_ENABLE_SUCCESS_MUTE", "SERVER_SET_ERROR_NO_CATEGORY", "SERVER_SET_ERROR_CATEGORY_DISABLED"
+        },
+        [ MessageTypes.CatAndValue ] = {
+            "SERVER_SET_VOLUME_SUCCESS"
+        }
+    } )
 end
 
 Shine:RegisterExtension( "sfx_plus", Plugin )
