@@ -45,7 +45,7 @@ Plugin.DefaultConfig = {
     }
 }
 
-local debug_print = false
+local debug_print = true
 
 local function Dbg( ... )
     arg = {...}
@@ -54,17 +54,17 @@ local function Dbg( ... )
     end
 end
 
-local function GetSampleTestSound(Cat)
+function Plugin:GetSampleTestSound(Cat)
     if Cat == SOUND_CAT_KILL then
-        return "sound/sfx_plus.fev/onassist/random"
+        return self.Sounds["FeedbackKillRand"]
     elseif Cat == SOUND_CAT_ASSIST then
-        return "sound/sfx_plus.fev/onkill/random"
+        return self.Sounds["FeedbackAssistRand"]
     elseif Cat == SOUND_CAT_KILLSTREAK then
-        return "sound/sfx_plus.fev/onkillstreak/random"
+        return self.Sounds["KillStreakRand"]
     elseif Cat == SOUND_CAT_STREAKSTOP then
-        return "sound/sfx_plus.fev/onstreakstop/random"
+        return self.Sounds["StreakStopRand"]
     elseif Cat == SOUND_CAT_THUGKILL then
-        return "sound/sfx_plus.fev/onthugkill/random"
+        return self.Sounds["ThugKillRand"]
     end
 end
 
@@ -73,8 +73,10 @@ function Plugin:Initialise()
 
     --Sounds
     self.Sounds = {
-        [ "FeedbackAssist" ]    = "sound/sfx_plus.fev/onassist/sound0",
-        [ "FeedbackKill" ]      = "sound/sfx_plus.fev/onkill/sound0",
+        [ "FeedbackKill" ]      = "sound/sfx_plus.fev/onkill/sound",
+        [ "FeedbackKillRand" ]  = "sound/sfx_plus.fev/onkill/random",
+        [ "FeedbackAssist" ]    = "sound/sfx_plus.fev/onassist/sound",
+        [ "FeedbackAssistRand" ]= "sound/sfx_plus.fev/onassist/random",
         [ "Triplekill" ]        = "sound/sfx_plus.fev/onkillstreak/triplekill",
         [ "Multikill" ]         = "sound/sfx_plus.fev/onkillstreak/multikill",
         [ "Rampage" ]           = "sound/sfx_plus.fev/onkillstreak/rampage",
@@ -183,7 +185,7 @@ function Plugin:ReceiveCommand( Message )
         end,
         [ "SetVolume" ] = function ( Cat, Volume )
             local old_config = self.Config[Cat].Volume
-            local SampleSfx = GetSampleTestSound( Cat )
+            local SampleSfx = self:GetSampleTestSound( Cat )
 
             self.Config[Cat].Volume = Volume
             self:SaveConfig()

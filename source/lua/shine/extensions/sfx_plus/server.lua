@@ -283,7 +283,7 @@ Plugin.DefaultConfig = {
     }
 }
 
-local debug_print = false
+local debug_print = true
 
 local function Dbg( ... )
     arg = {...}
@@ -422,7 +422,7 @@ function Plugin.GetRealDamageDealer( DamageDealer )
         end
     end
 
-    return DamageDealer
+    return RealKiller
 end
 
 local function GenerateProperMsg( PreferredLocale, TextData, ... )
@@ -543,7 +543,7 @@ function Plugin:ProcessKillAndAssistFeedback( Attacker, Victim )
 
             if currentAttacker then
                 if currentAttacker ~= Attacker then
-                    Dbg( "KA Feedback: Sending kill feedback to %s", currentAttacker:GetName() )
+                    Dbg( "KA Feedback: Sending assist feedback to %s", currentAttacker:GetName() )
                     self:DispatchDesc(
                         currentAttacker:GetClient(),
                         self.Config.AssistFeedback.Desc,
@@ -582,9 +582,10 @@ end
 
 function Plugin:ProcessKillStreakAndStreakStop( Attacker, Victim )
     Dbg("Streak and Stop: Entering ...")
-    Attacker = self.GetRealDamageDealer( Attacker )
-    if not Attacker or not Victim or not Victim:isa( "Player" ) then return end
-    Dbg("Streak and Stop: Valid Attacker and Victim")
+    if not Victim or not Victim:isa( "Player" ) then
+        return
+    end
+    Dbg("Streak and Stop: Valid Victim")
 
     local VictimClient = Victim:GetClient()
     if not VictimClient then return end
@@ -603,23 +604,32 @@ function Plugin:ProcessKillStreakAndStreakStop( Attacker, Victim )
             StreakStopDesc = self.Config.StreakStop.Desc[i]
         end
 
+        local RealKiller = self.GetRealDamageDealer( Attacker )
+        if not RealKiller then
+            RealKiller = Attacker
+        end
+
         if StreakStopDesc then
             Dbg("Streak and Stop: Triggered StreakStop, TriggerLevel/%s", StreakStopDesc.TriggerLevel)
             self:DispatchDesc(
-                Attacker:GetClient(),
+                RealKiller and RealKiller:GetClient() or nil,
                 StreakStopDesc,
                 CAT_STREAKSTOP,
                 self:GetTeamColour(Victim),
                 Victim:GetName(),
-                Attacker:GetName()
+                RealKiller and RealKiller:GetName() or "None"
             )
         end
         self.Killstreaks[ VictimClient ] = nil
     end
 
+    Attacker = self.GetRealDamageDealer( Attacker )
+    if not Attacker then return end
+    Dbg("Streak and Stop: Valid Attacker")
+
     local AttackerClient = Attacker:GetClient()
     if not AttackerClient then return end
-    Dbg("Streak and Stop: Valid Attacker and Victim")
+    Dbg("Streak and Stop: Valid Attacker.Client")
 
     if not self.Killstreaks[ AttackerClient ] then self.Killstreaks[ AttackerClient ] = 1
     else self.Killstreaks[ AttackerClient ] = self.Killstreaks[ AttackerClient ] + 1 end

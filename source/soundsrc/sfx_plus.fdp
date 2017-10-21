@@ -1156,7 +1156,7 @@
 <notes></notes>
 <simpleevent>
 <event>
-<name>sound0</name>
+<name>sound</name>
 <guid>{5fb9ed4e-69e0-4478-9f42-4dd4c516eeb0}</guid>
 <parameter_nextid>0</parameter_nextid>
 <layer_nextid>1</layer_nextid>
@@ -1573,7 +1573,7 @@
 <notes></notes>
 <simpleevent>
 <event>
-<name>sound0</name>
+<name>sound</name>
 <guid>{7a51f47e-dcf7-4951-babe-b6538959bb70}</guid>
 <parameter_nextid>0</parameter_nextid>
 <layer_nextid>1</layer_nextid>
