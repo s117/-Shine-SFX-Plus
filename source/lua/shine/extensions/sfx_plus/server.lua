@@ -2,6 +2,8 @@
 Shine SFX Plus Plugin - Server
 ]]
 
+require("shine.extensions.sfx_plus.debug_log")
+
 local Shine = Shine
 local StringFormat = string.format
 local IsType = Shine.IsType
@@ -290,15 +292,6 @@ Plugin.DefaultConfig = {
         }
     }
 }
-
-local debug_print = true
-
-local function Dbg( ... )
-    arg = {...}
-    if debug_print then
-        Log(unpack(arg))
-    end
-end
 
 function Plugin:Initialise()
     self.Enabled = true
