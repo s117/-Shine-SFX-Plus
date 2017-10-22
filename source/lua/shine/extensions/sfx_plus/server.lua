@@ -2,6 +2,8 @@
 Shine SFX Plus Plugin - Server
 ]]
 
+require("shine.extensions.sfx_plus.debug_log")
+
 local Shine = Shine
 local StringFormat = string.format
 local IsType = Shine.IsType
@@ -291,15 +293,6 @@ Plugin.DefaultConfig = {
     }
 }
 
-local debug_print = false
-
-local function Dbg( ... )
-    arg = {...}
-    if debug_print then
-        Log(unpack(arg))
-    end
-end
-
 function Plugin:Initialise()
     self.Enabled = true
 
@@ -387,17 +380,18 @@ function Plugin:ReceiveClientMsg( Client, Message )
 
     MsgHandler = {
         ["PreferredLocale"] = function ( Client, Value )
+            Dbg("Client %s requests updating preferred locale: %s", Client, Value)
             for i = 1, #self.Config.LocaleSupported do
                 if Value == self.Config.LocaleSupported[i] then
                     self.ClientPreferredLocale[ Client ] = Value
                     Dbg("Updated client preferred locale: %s, %s", Client, Value)
                     return
                 end
-
-                self.ClientPreferredLocale[ Client ] = self.Config.LocaleFallback
-                Shine:NotifyColour( Client, 255, 0, 0, StringFormat( self.Config.LocaleFallbackChatNofity ) )
-                Dbg("Updated client preferred locale: %s, %s (fallback)", Client, self.Config.LocaleFallback )
             end
+
+            self.ClientPreferredLocale[ Client ] = self.Config.LocaleFallback
+            Shine:NotifyColour( Client, 255, 0, 0, StringFormat( self.Config.LocaleFallbackChatNofity ) )
+            Dbg("Updated client preferred locale: %s, %s (fallback)", Client, self.Config.LocaleFallback )
         end,
         ["ChatEcho"] = function ( Client, Value )
             Shine:NotifyColour( Client, 255, 255, 255, Value )

@@ -2,6 +2,8 @@
 Shine Kill SFX Plugin - Shared
 ]]
 
+require("shine.extensions.sfx_plus.debug_log")
+
 local Plugin = {}
 Plugin.Version = "1.0"
 

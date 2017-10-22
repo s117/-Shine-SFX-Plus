@@ -2,6 +2,8 @@
 Shine SFX Plus Plugin - Client
 ]]
 
+require("shine.extensions.sfx_plus.debug_log")
+
 local Shine = Shine
 local SGUI = Shine.GUI
 local VoteMenu = Shine.VoteMenu
@@ -44,15 +46,6 @@ Plugin.DefaultConfig = {
         Volume       = 100,
     }
 }
-
-local debug_print = false
-
-local function Dbg( ... )
-    arg = {...}
-    if debug_print then
-        Log(unpack(arg))
-    end
-end
 
 function Plugin:GetSampleTestSound(Cat)
     if Cat == SOUND_CAT_KILL then
