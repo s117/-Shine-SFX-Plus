@@ -20,10 +20,10 @@
     "CLIENT_TAB_THUGKILL_LABEL_ENABLE_PLAY_THUGKILL_SOUND"      : "播放暴徒击杀（用斧子、枪托、寄生等武器击杀）\n的音效。",
     "CLIENT_TAB_THUGKILL_LABEL_THUGKILL_SOUND_VOLUME"           : "暴徒击杀音效音量：",
 
-    "SERVER_SET_ENABLE_SUCCESS_PLAY"                            : "Setting accepted: Play sound for '{Category}'",
-    "SERVER_SET_ENABLE_SUCCESS_MUTE"                            : "Setting accepted: Mute sound for '{Category}'",
-    "SERVER_SET_VOLUME_SUCCESS"                                 : "Setting accepted: The volume of '{Category}' is now {Value}",
-    "SERVER_SET_ERROR_NO_CATEGORY"                              : "Error: No category '{Category}', check your command.",
-    "SERVER_SET_ERROR_CATEGORY_DISABLED"                        : "Error: Category '{Category}' is disabled on this server.",
-    "SERVER_SET_ERROR_INVALID_PARAMETER"                        : "Error: Invalid parameter, check your command."
+    "SERVER_SET_ENABLE_SUCCESS_PLAY"                            : "设置生效: 将播放 '{Category}' 音效。",
+    "SERVER_SET_ENABLE_SUCCESS_MUTE"                            : "设置生效: 将屏蔽 '{Category}' 音效。",
+    "SERVER_SET_VOLUME_SUCCESS"                                 : "设置生效: '{Category}' 音效的当前音量为 {Value}。",
+    "SERVER_SET_ERROR_NO_CATEGORY"                              : "设置错误: 没有 '{Category}' 音效, 请重新检查你的命令。",
+    "SERVER_SET_ERROR_CATEGORY_DISABLED"                        : "设置错误: 音效 '{Category}' 在当前的服务器没有被启动。",
+    "SERVER_SET_ERROR_INVALID_PARAMETER"                        : "设置错误: 参数非法，请重新检查你的命令。"
 }
