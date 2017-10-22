@@ -1,8 +1,27 @@
 name        = "[Shine] SFX Plus"
 source_dir  = "source"
 output_dir  = "output"
-description = [=[]=]
+description = [=[A Shine plugin for bringing more sound effect to NS2.
+
+Currently, it has all the functions that Boom Kill Sound Plus, Killstreak Plus, and Thug Kill provides. Besides, it also provides:
+
+1. A Votemenu GUI panel for the client to adjust volume and mute setting of each sound effect.
+2. Various killstreak stopping message according to the kill number.
+3. More flexible event definition. *
+4. Multi-language support for the event's text message. **
+
+
+* You can specify whether an event should be broadcasted or unicasted, play a sound effect, or send a text message in the chat channel. For example, you can advertise a healspray kill to all the players with a text message and sound effect, but only throw a double kill sound effect to the killer with no text message. This feature intends to avoid the message or sound effect flooding.
+
+** To prevent the white text message dues lacking proper fonts, now you can prepare text templates for different languages in your plugin's JSON config. You can also specify a fallback locale for the clients who are using unprepared locale.
+
+There hasn't a wiki page for this mod yet, but customising it from the default config should be quite straightforward. If you have any question, feel free to contact me in Discord or just leave a comment. We will keep improving this mod, any suggestion or feedback is welcome!
+
+Appreciate the help from those mighty guys in the community, Las, Nin, Brute, Ghoul, ...
+
+Github page: https://github.com/s117/-Shine-SFX-Plus
+MIT License]=]
 image       = "preview.jpg"
-tag_modtype = ""
-tag_support = ""
+tag_modtype = "Gameplay Tweak"
+tag_support = "Must be run on Server"
 publish_id = "4606aced"
