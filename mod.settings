@@ -1,8 +1,8 @@
 name        = "[Shine] SFX Plus Dev"
 source_dir  = "source"
 output_dir  = "output"
-description = [=[]=]
+description = [=[Development branch of [Shine] SFX Plus (http://steamcommunity.com/sharedfiles/filedetails/?id=1174842605), it also prints extra debug log when running. You may never need this if everythings goes well...]=]
 image       = "preview.jpg"
-tag_modtype = ""
-tag_support = ""
+tag_modtype = "Gameplay Tweak"
+tag_support = "Must be run on Server"
 publish_id = "460713a8"
