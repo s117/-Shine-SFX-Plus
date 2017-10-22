@@ -1,8 +1,8 @@
-name        = "[Shine] SFX Plus"
+name        = "[Shine] SFX Plus Dev"
 source_dir  = "source"
 output_dir  = "output"
 description = [=[]=]
 image       = "preview.jpg"
 tag_modtype = ""
 tag_support = ""
-publish_id = "4606aced"
+publish_id = "460713a8"
