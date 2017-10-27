@@ -546,14 +546,12 @@ function Plugin:ProcessKillAndAssistFeedback( Attacker, Victim )
             self:GetTeamColour(Attacker)
         )
 
-        local VictimDamagePoints = Victim.damagePoints
-        if not VictimDamagePoints then
-            Dbg( "KA Feedback: The victim has no damagePoints member, skip assist feedback.")
-            return
-        end
+        local VictimAttackers = Victim.damagePoints.attackers
 
-        for attackerId, damageDone in pairs(VictimDamagePoints) do
-            local currentAttacker = self.GetRealDamageDealer( Shared.GetEntity(attackerId) )
+        for i = 1, #VictimAttackers do
+            local attackerId = VictimAttackers[i]
+
+            local currentAttacker = self.GetRealDamageDealer( Shared.GetEntity( attackerId ) )
 
             if currentAttacker then
                 if currentAttacker ~= Attacker then
