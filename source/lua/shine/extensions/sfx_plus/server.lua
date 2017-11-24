@@ -23,6 +23,7 @@ Plugin.CheckConfig = true
 Plugin.DefaultConfig = {
     BotPostToken = 'K12e92aD67c922F7',
     BotPostURL = 'http://localhost:27030/server_event_post',
+    BotPostPrefix = '[Broadcast] ',
     AlienColour = { 255, 125, 0 },
     MarineColour = { 0, 125, 255 },
 

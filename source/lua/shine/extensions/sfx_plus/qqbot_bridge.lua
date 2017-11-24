@@ -55,7 +55,7 @@ function QQBotBridge:CheckQQBotPost(Attacker, Victim, Cat ,Desc)
         return
     end
 
-    self:PostMsg(Msg)
+    self:PostMsg(self.Config.BotPostPrefix .. Msg)
 
 end
 
