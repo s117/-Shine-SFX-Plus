@@ -2,7 +2,7 @@
 Shine SFX Plus Plugin - Server
 ]]
 
-require("shine.extensions.sfx_plus.debug_log")
+Script.Load(Shine.GetPluginFile("sfx_plus", "debug_log.lua"))
 
 local Shine = Shine
 local StringFormat = string.format
