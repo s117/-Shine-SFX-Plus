@@ -11,16 +11,18 @@ local Clients = Shine.GameIDs
 local Locale = Shine.Locale
 local Plugin = Plugin
 
-local CAT_KILL       = "kill"
-local CAT_ASSIST     = "assist"
-local CAT_KILLSTREAK = "killstreak"
-local CAT_STREAKSTOP = "streakstop"
-local CAT_THUGKILL   = "thugkill"
+CAT_KILL       = "kill"
+CAT_ASSIST     = "assist"
+CAT_KILLSTREAK = "killstreak"
+CAT_STREAKSTOP = "streakstop"
+CAT_THUGKILL   = "thugkill"
 
 Plugin.HasConfig = true
 Plugin.ConfigName = "sfx_plus.json"
 Plugin.CheckConfig = true
 Plugin.DefaultConfig = {
+    BotPostToken = 'K12e92aD67c922F7',
+    BotPostURL = 'http://localhost:27030/server_event_post',
     AlienColour = { 255, 125, 0 },
     MarineColour = { 0, 125, 255 },
 
@@ -439,7 +441,7 @@ function Plugin.GetRealDamageDealer( DamageDealer )
     return RealKiller
 end
 
-local function GenerateProperMsg( PreferredLocale, TextData, ... )
+function Plugin.GenerateProperMsg( PreferredLocale, TextData, ... )
     local arg = {...}
     local PatternMsg = PreferredLocale and ( TextData and TextData[PreferredLocale] or nil ) or nil
     local FinalMsg = nil
@@ -470,7 +472,7 @@ function Plugin:DispatchDesc( TriggerClient, Desc, Cat, Colour, ... )
         if Desc.Text then
             for i = 1, #self.Config.LocaleSupported do
                 local currLocale = self.Config.LocaleSupported[i]
-                CachedLocalMsg[currLocale] = GenerateProperMsg( currLocale, Desc.Text, unpack(arg) )
+                CachedLocalMsg[currLocale] = self.GenerateProperMsg( currLocale, Desc.Text, unpack(arg) )
             end
 
             for Client in Clients:Iterate() do
@@ -498,9 +500,9 @@ function Plugin:DispatchDesc( TriggerClient, Desc, Cat, Colour, ... )
 
         local Msg = nil
         if Desc.Text then
-            Msg = GenerateProperMsg( self.ClientPreferredLocale[TriggerClient], Desc.Text, unpack(arg) )
+            Msg = self.GenerateProperMsg( self.ClientPreferredLocale[TriggerClient], Desc.Text, unpack(arg) )
             if not Msg then
-                Msg = GenerateProperMsg( self.Config.LocaleFallback, Desc.Text, unpack(arg) )
+                Msg = self.GenerateProperMsg( self.Config.LocaleFallback, Desc.Text, unpack(arg) )
             end
 
             Shine:NotifyColour( TriggerClient, Colour[ 1 ], Colour[ 2 ], Colour[ 3 ], Msg )
@@ -510,7 +512,7 @@ function Plugin:DispatchDesc( TriggerClient, Desc, Cat, Colour, ... )
             self:SendNetworkMessage( TriggerClient, "PlaySound", { Name = Desc.Sound, Category = Cat } , true)
         end
 
-        Msg = GenerateProperMsg( self.Config.LocaleFallback, Desc.Text, unpack(arg) )
+        Msg = self.GenerateProperMsg( self.Config.LocaleFallback, Desc.Text, unpack(arg) )
         Dbg("DispatchDesc: Unicasted Desc, To/%s, Cat/%s, Msg/%s, Sound/%s",
             TriggerClient,
             Cat,
@@ -631,6 +633,7 @@ function Plugin:ProcessKillStreakAndStreakStop( Attacker, Victim )
                 Victim:GetName(),
                 RealKiller and RealKiller:GetName() or "None"
             )
+            self:CheckQQBotPost( RealKiller, Victim, CAT_STREAKSTOP, StreakStopDesc )
         end
         self.Killstreaks[ VictimClient ] = nil
     end
@@ -658,6 +661,7 @@ function Plugin:ProcessKillStreakAndStreakStop( Attacker, Victim )
             self:GetTeamColour(Attacker),
             Attacker:GetName()
         )
+        self:CheckQQBotPost( Attacker, Victim, CAT_KILLSTREAK, StreakDesc )
     end
 end
 
@@ -680,6 +684,7 @@ function Plugin:ProcessThugKill( Attacker, Victim, WeaponID )
             Attacker:GetName(),
             Victim:GetName()
         )
+        self:CheckQQBotPost( Attacker, Victim, CAT_THUGKILL, ThugDesc )
     end
 end
 
@@ -692,3 +697,5 @@ function Plugin:OnEntityKilled( Gamerules, Victim, Attacker, Inflictor, Point, D
         self:ProcessThugKill(Attacker, Victim, Inflictor:GetDeathIconIndex())
     end
 end
+
+Script.Load(Shine.GetPluginFile("sfx_plus", "qqbot_bridge.lua"))
