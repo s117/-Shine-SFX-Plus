@@ -2,7 +2,7 @@
 Shine Kill SFX Plugin - Shared
 ]]
 
-require("shine.extensions.sfx_plus.debug_log")
+Script.Load(Shine.GetPluginFile("sfx_plus", "debug_log.lua"))
 
 local Plugin = {}
 Plugin.Version = "1.0"
