@@ -8,9 +8,6 @@ local Plugin = Plugin
 
 local IsType = Shine.IsType
 
-local MaxFailBeforeFallback = 3
-
-
 
 -- CAT_KILL       = "kill"
 -- CAT_ASSIST     = "assist"
@@ -37,6 +34,8 @@ local function CheckIsRealPlayer(Player)
 end
 
 function QQBotBridge:CheckQQBotPost(Attacker, Victim, Cat ,Desc)
+    if not self.Config.PostBotBroadcast then return end
+
     if not Desc.Broadcast then return end
 
     if not CheckIsRealPlayer(Attacker) or not CheckIsRealPlayer(Victim) then
