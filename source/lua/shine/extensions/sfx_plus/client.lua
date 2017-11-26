@@ -153,7 +153,11 @@ end
 
 
 function Plugin:GetSoundSfxCurrentSetting( Cat )
-    return self.Config[Cat].Play, self.Config[Cat].Volume
+    if not self.Config then
+        return false, 0
+    else
+        return self.Config[Cat].Play, self.Config[Cat].Volume
+    end
 end
 
 
