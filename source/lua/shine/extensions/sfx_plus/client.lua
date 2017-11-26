@@ -2,7 +2,7 @@
 Shine SFX Plus Plugin - Client
 ]]
 
-require("shine.extensions.sfx_plus.debug_log")
+Script.Load(Shine.GetPluginFile("sfx_plus", "debug_log.lua"))
 
 local Shine = Shine
 local SGUI = Shine.GUI
@@ -153,7 +153,11 @@ end
 
 
 function Plugin:GetSoundSfxCurrentSetting( Cat )
-    return self.Config[Cat].Play, self.Config[Cat].Volume
+    if not self.Config then
+        return false, 0
+    else
+        return self.Config[Cat].Play, self.Config[Cat].Volume
+    end
 end
 
 
