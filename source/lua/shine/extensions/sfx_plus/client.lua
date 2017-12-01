@@ -167,7 +167,13 @@ function Plugin:ReceivePlaySound( Message )
     local Play, Volume = Plugin:GetSoundSfxCurrentSetting(Message.Category)
 
     if Play then
-        StartSoundEffect( self.Sounds[ Message.Name ], Volume / 100 )
+        local SfxResName = self.Sounds[ Message.Name ]
+
+        if SfxResName then
+            StartSoundEffect( SfxResName, Volume / 100 )
+        else
+            Dbg( "[Shine]SFX-Plus: Fail to load res for sound name '%s'", Message.Name )
+        end
     end
 end
 
