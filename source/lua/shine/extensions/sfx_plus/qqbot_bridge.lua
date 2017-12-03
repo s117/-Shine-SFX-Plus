@@ -1,6 +1,6 @@
-----[[
---  Library definition of CRS
---]]
+--[[
+  Bot post bridge 
+]]
 
 
 local QQBotBridge = {}
