@@ -88,6 +88,7 @@ function Plugin:Initialise()
         [ "Godlike" ]           = "sound/sfx_plus.fev/onkillstreak/godlike",
         [ "KillStreakRand" ]    = "sound/sfx_plus.fev/onkillstreak/random",
         [ "StreakStop" ]        = "sound/sfx_plus.fev/onstreakstop/surprisemfk",
+        [ "StreakStop2" ]        = "sound/sfx_plus.fev/onstreakstop/glassimpacts",
         [ "StreakStopRand" ]    = "sound/sfx_plus.fev/onstreakstop/random",
         [ "ThugKill1" ]         = "sound/sfx_plus.fev/onthugkill/humiliation",
         [ "ThugKill2" ]         = "sound/sfx_plus.fev/onthugkill/humiliating",
