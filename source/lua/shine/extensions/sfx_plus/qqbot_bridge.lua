@@ -34,13 +34,16 @@ local function CheckIsRealPlayer(Player)
 end
 
 function QQBotBridge:CheckQQBotPost(Attacker, Victim, Cat ,Desc)
-    if not self.Config.PostBotBroadcast then return end
+    Dbg("Checking post")
+    if not self.Config.BotPostEnable then return end
 
     if not Desc.Broadcast then return end
 
     if not CheckIsRealPlayer(Attacker) or not CheckIsRealPlayer(Victim) then
         return
     end
+
+    Dbg("Checking pass")
 
     local Msg = nil
 
@@ -54,8 +57,11 @@ function QQBotBridge:CheckQQBotPost(Attacker, Victim, Cat ,Desc)
         return
     end
 
+    Dbg("Preparing Post")
+
     self:PostMsg(self.Config.BotPostPrefix .. Msg)
 
+    Dbg("Post done")
 end
 
 function QQBotBridge:PostMsg(Msg)
