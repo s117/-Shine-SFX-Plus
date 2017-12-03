@@ -43,10 +43,7 @@ Plugin.DefaultConfig = {
     KillStreak = {
         Desc = {
             [ 2 ] = {
-                Text = {
-                    zhCN = "%s 拿到双杀！",
-                    enUS = "%s is on a double kill!",
-                },
+                Text = null,
                 Broadcast = false,
                 Sound = "Doublekill"
             },
@@ -59,10 +56,7 @@ Plugin.DefaultConfig = {
                 Sound = "Triplekill"
             },
             [ 4 ] = {
-                Text = {
-                    zhCN = "%s 连杀不止！",
-                    enUS = "%s is on multikill!",
-                },
+                Text = null,
                 Broadcast = false,
                 Sound = "Multikill"
             },
@@ -156,7 +150,7 @@ Plugin.DefaultConfig = {
             },
             [ 23 ] = {
                 Text = {
-                    zhCN = "天哪！ %s 又杀了一个！",
+                    zhCN = "妈卖批！%s 正在渡劫，再杀两个就要超神了！",
                     enUS = "Holy Shit! %s got another one!",
                 },
                 Broadcast = true,
@@ -164,7 +158,7 @@ Plugin.DefaultConfig = {
             },
             [ 24 ] = {
                 Text = {
-                    zhCN = "天哪！ %s 又杀了一个！",
+                    zhCN = "妈卖批！%s 正在渡劫，再杀一个马上超神！",
                     enUS = "Holy Shit! %s got another one!",
                 },
                 Broadcast = true,
@@ -194,7 +188,7 @@ Plugin.DefaultConfig = {
             {
                 TriggerLevel = 6,
                 Text = {
-                    zhCN = "%s 的连杀已经被 %s 终结了",     -- first victim then killer
+                    zhCN = "%s 从 %s 那里学会了一句英文: “shut down”！", -- first victim then killer
                     enUS = "%s's killing spree has been stopped by %s ",        -- first victim then killer
                 },
                 Broadcast = true,
@@ -203,16 +197,16 @@ Plugin.DefaultConfig = {
             {
                 TriggerLevel = 11,
                 Text = {
-                    zhCN = "%s 无人能挡被 %s 终结了", -- first victim then killer
-                    enUS = "%s's unstoppable has been stopped by %s",            -- first victim then killer
+                    zhCN = "%s 嚣张的连杀被 %s 终结了，丢人玩意儿！", -- first victim then killer
+                    enUS = "%s's unstoppable has been stopped by %s",        -- first victim then killer
                 },
                 Broadcast = true,
-                Sound = "StreakStop"
+                Sound = "StreakStop2"
             },
             {
                 TriggerLevel = 21,
                 Text = {
-                    zhCN = "%s 怪物般的杀戮被 %s 终结了",     -- first victim then killer
+                    zhCN = "%s 被 %s 打回到刚生下来的样子，丑啊！", -- first victim then killer
                     enUS = "%s's monster kill has been stopped by %s",        -- first victim then killer
                 },
                 Broadcast = true,
@@ -221,11 +215,11 @@ Plugin.DefaultConfig = {
             {
                 TriggerLevel = 25,
                 Text = {
-                    zhCN = "%s 的超神已经被 %s 终结了", -- first victim then killer
-                    enUS = "%s's Godlike has been stopped by %s",            -- first victim then killer
+                    zhCN = "%s 以为自己牛逼？ %s 说你是个辣鸡！", -- first victim then killer
+                    enUS = "%s's Godlike has been stopped by %s",        -- first victim then killer
                 },
                 Broadcast = true,
-                Sound = "StreakStop"
+                Sound = "StreakStop2"
             }
         }
     },
@@ -233,48 +227,48 @@ Plugin.DefaultConfig = {
         Desc = {
             [ 3 ] = { -- Weapon ID - Marine Rifle Butt
                 Text = {
-                    zhCN = "%s 用枪托击杀了 %s！",            -- first killer then victim
-                    enUS = "%s kills %s by RIFLEBUTT!",            -- first killer then victim
+                    zhCN = "天哪！%s 乱甩枪托居然砸死了 %s！",        -- first killer then victim
+                    enUS = "%s kills %s by RIFLE BUTT!",        -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
             },
             [ 5 ] = { -- Weapon ID - Marine Knife
                 Text = {
-                    zhCN = "%s 用斧子击杀了 %s！",            -- first killer then victim
-                    enUS = "%s kills %s by AXE!",            -- first killer then victim
+                    zhCN = "哎哟！%s 一斧子下去竟把 %s 给砍死了！",        -- first killer then victim
+                    enUS = "%s kills %s by AXE!",        -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
             },
             [ 11 ] = { -- Weapon ID - Marine Welder
                 Text = {
-                    zhCN = "%s 用焊枪击杀了 %s！",            -- first killer then victim
-                    enUS = "%s kills %s by WELDER!",            -- first killer then victim
+                    zhCN = "夸张！%s 竟用焊枪帮 %s 烫发！",        -- first killer then victim
+                    enUS = "%s kills %s by WELDER!",        -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
             },
             [ 14 ] = { -- Weapon ID - Groge's Heal Spray
                 Text = {
-                    zhCN = "%s 用疗伤喷雾击杀了 %s！",            -- first killer then victim
-                    enUS = "%s kills %s by HEAL SPRAY!",            -- first killer then victim
+                    zhCN = "震惊！%s 竟用疗伤喷雾把 %s 涂抹致死！",        -- first killer then victim
+                    enUS = "%s kills %s by HEAL SPRAY!",        -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
             },
             [ 16 ] = { -- Weapon ID - Skulk's parasite
                 Text = {
-                    zhCN = "%s 用寄生击杀了 %s！",            -- first killer then victim
-                    enUS = "%s kills %s by PARASITE!",            -- first killer then victim
+                    zhCN = "好痛！%s 竟把一根针射进了 %s 的菊花深处！",        -- first killer then victim
+                    enUS = "%s kills %s by PARASITE!",        -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
             },
             [ 21 ] = { -- Weapon ID - Groge's BileBomb
                 Text = {
-                    zhCN = "%s 用胆汁炸弹击杀了 %s！",            -- first killer then victim
-                    enUS = "%s kills %s by BILEBOMB!",            -- first killer then victim
+                    zhCN = "什么！%s 居然用老坛酸菜把 %s 淹死了！",        -- first killer then victim
+                    enUS = "%s kills %s by BILEBOMB!",        -- first killer then victim
                 },
                 Broadcast = true,
                 Sound = "ThugKillRand"  -- Random sound
