@@ -1,4 +1,5 @@
 output
 *.bak
 *.log
+*.orig
 undo-log.txt
