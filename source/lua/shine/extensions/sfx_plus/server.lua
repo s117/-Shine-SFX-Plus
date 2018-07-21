@@ -535,7 +535,7 @@ function Plugin:ProcessKillAndAssistFeedback( Attacker, Victim )
 
     if not Attacker or not Victim then return end
 
-    if Victim:isa( "Player" ) then
+    if Victim:isa( "Player" ) and Attacker:isa( "Player" ) and Attacker ~= Victim then
         Dbg( "KA Feedback: Sending kill feedback to %s", Attacker:GetName() )
         self:DispatchDesc(
             Attacker:GetClient(),
@@ -619,7 +619,7 @@ function Plugin:ProcessKillStreakAndStreakStop( Attacker, Victim )
             RealKiller = Attacker
         end
 
-        if StreakStopDesc then
+        if StreakStopDesc and RealKiller and RealKiller:isa( "Player" ) and RealKiller ~= Victim then
             Dbg("Streak and Stop: Triggered StreakStop, TriggerLevel/%s", StreakStopDesc.TriggerLevel)
             self:DispatchDesc(
                 RealKiller and RealKiller:GetClient() or nil,
@@ -689,7 +689,7 @@ function Plugin:OnEntityKilled( Gamerules, Victim, Attacker, Inflictor, Point, D
 
     self:ProcessKillStreakAndStreakStop(Attacker, Victim)
 
-    if Inflictor then
+    if Inflictor and Inflictor.GetDeathIconIndex then
         self:ProcessThugKill(Attacker, Victim, Inflictor:GetDeathIconIndex())
     end
 end
